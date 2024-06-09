@@ -1,3 +1,5 @@
+# WORK IN PROGRESS!
+
 # twc3simulator (Tesla Wall Box 3 Simulator)
 
 This program simulates the API output of a Tesla Wallbox 3.
