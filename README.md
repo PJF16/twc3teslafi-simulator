@@ -28,4 +28,8 @@ via docker:
 
 if it's running properly you should get something back when looking at
 
-http://<ip>/api/1/vitals
+http://localhost/api/1/vitals
+
+## ToDos
+
+- add geofencing
