@@ -103,7 +103,7 @@ async def data():
             prox_v=0.0,
             pilot_high_v=11.9,
             pilot_low_v=11.8,
-            session_energy_wh=teslafi_data.get('charge_energy_added'),
+            session_energy_wh=float(teslafi_data.get('charge_energy_added'))*1000,
             config_status=5,
             evse_state=1,
             current_alerts=[]
