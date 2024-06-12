@@ -33,3 +33,4 @@ http://localhost/api/1/vitals
 ## ToDos
 
 - add geofencing
+- add support for multiple cars
