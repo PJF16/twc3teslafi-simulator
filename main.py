@@ -1,6 +1,7 @@
 import requests
 import json
 import time
+import os
 from pydantic import BaseModel
 from fastapi import FastAPI, HTTPException
 
