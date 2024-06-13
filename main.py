@@ -8,7 +8,7 @@ app = FastAPI()
 
 # TeslaFi API URL and API KEY
 TESLAFI_API_URL = "https://www.teslafi.com/feed.php"
-TESLAFI_API_KEY = "YOUR_API_KEY"
+TESLAFI_API_KEY = os.getenv('TESLAFI_API_KEY')
 
 # Define the data structure
 class Vitals(BaseModel):
