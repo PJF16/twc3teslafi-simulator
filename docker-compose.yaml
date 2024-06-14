@@ -9,5 +9,8 @@ services:
     ports:
       - "80:8667"
     environment:
-      - TESLAFI_API_KEY=XXX_YOUR_API_KEY_XXXX
+      TESLAFI_API_KEY: "XXX_YOUR_TESLAFI_API_KEY_XXX"
+      LONGITUDE: "48.201773" #charger location longitude
+      LATITUDE: "16.348655" #charger locatoin latitude
+      RADIUS: "200" #geofence radius in meters
     restart: always

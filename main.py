@@ -4,12 +4,16 @@ import time
 import os
 from pydantic import BaseModel
 from fastapi import FastAPI, HTTPException
+from haversine import haversine, Unit
 
 app = FastAPI()
 
 # TeslaFi API URL and API KEY
 TESLAFI_API_URL = "https://www.teslafi.com/feed.php"
 TESLAFI_API_KEY = os.getenv('TESLAFI_API_KEY')
+
+RADIUS = int(os.getenv('RADIUS'))
+CHARGER_POINT = (float(os.getenv('LONGITUDE')), float(os.getenv('LATITUDE')))
 
 # Define the data structure
 class Vitals(BaseModel):
@@ -64,22 +68,25 @@ def get_teslafi_data():
             return None
     return cache['data']
 
-
-
+def is_vehicle_in_range(latitude, longitude):
+    current_location = (latitude, longitude)
+    distance = haversine(current_location, CHARGER_POINT, unit=Unit.METERS)
+    return distance <= RADIUS
 
 @app.get("/api/1/vitals", response_model=Vitals)
 async def data():
+    charging = False
     teslafi_data = get_teslafi_data()
     if teslafi_data:
-        charging = False
-        if teslafi_data.get('charging_state') == "Disconnected":
-            # charger not connected
-            connected = False
-        else:
-            # charger connected and extract data
-            connected = True
-            if teslafi_data.get('charging_state') == "Charging":
-                charging = True
+        if is_vehicle_in_range(float(teslafi_data.get('longitude')), float (teslafi_data.get('latitude'))):
+            if teslafi_data.get('charging_state') == "Disconnected":
+                # charger not connected
+                connected = False
+            else:
+                # charger connected and extract data
+                connected = True
+                if teslafi_data.get('charging_state') == "Charging":
+                    charging = True
 
         vitals = Vitals(
             contactor_closed=charging,
