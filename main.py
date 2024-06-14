@@ -76,6 +76,7 @@ def is_vehicle_in_range(latitude, longitude):
 @app.get("/api/1/vitals", response_model=Vitals)
 async def data():
     charging = False
+    connected = False
     teslafi_data = get_teslafi_data()
     if teslafi_data:
         if is_vehicle_in_range(float(teslafi_data.get('longitude')), float (teslafi_data.get('latitude'))):
