@@ -18,11 +18,11 @@ I use this as a workaround to get evcc working with a normal non-smart wallbox, 
 
 ## Installation
 
-Set your API-Key in main.py
+Set variables in docker-compose.yaml
 
 via docker:
 
-    docker-compose up
+    docker-compose up --build
 
 ## validate
 
@@ -32,5 +32,4 @@ http://localhost/api/1/vitals
 
 ## ToDos
 
-- add geofencing
 - add support for multiple cars
